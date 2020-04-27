@@ -11,6 +11,9 @@ class Finance: public AccountHolder
         void withdrawFunds();
         void transactions();
         void tempLoan();
+        void investChoice(long double initiallInvestment);
+        void investOptionDisplay(int minInvestYears, long double initiallInvestment, int percentage, std::string investmentPlan);
+        void invest();
 
 
     private:

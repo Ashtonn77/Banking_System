@@ -74,11 +74,98 @@ void Finance::tempLoan(){
     std::cin >> choice;
     std::cin.ignore();
 
-    toupper(choice) == 'Y' ?  std::cout << "Loan approved :)" << std::endl :
-     std::cout << "Sorry we couldn't come to an agreement :(" << std::endl;
-
+    if(toupper(choice) == 'Y'){
+        balance[0] += loanAmnt;
+        std::cout << "Loan approved...your current balance is R" << balance[0] << std::endl;
+    }
+    else{
+        std::cout << "Sorry we couldn't come to an agreement :(" << std::endl;
+    }
 }
 
+//**fix below
+
+//invest choice
+void Finance::investChoice(long double initiallInvestment){
+    char choice{};
+    char choice2{};
+    std::cout << "Would you like to go ahead with the investment?___y/n  ";
+    std::cin >> choice;
+    std::cin.ignore();
+    if(toupper(choice) == 'Y'){
+        if(initiallInvestment < balance[0]){
+            balance[0] -= initiallInvestment;
+            std::cout << "Great stuff...your funds have been invested" << std::endl;
+        }
+        else{
+            std::cout << "I'm sorry you have insufficient funds to proceed" << std::endl;
+            std::cout << "Would you like to make a deposit into your account?___y/n  ";
+            std::cin >> choice2;
+            std::cin.ignore();
+            if(toupper(choice2) == 'Y'){
+                depositFunds();
+            }else{
+                std::cout << "back to menu" << std::endl;
+            }
+        }//end first inner else
+    }else{
+        std::cout << "back to menu" << std::endl;
+    }//end outer most else
+}
+
+
+//invest display
+void Finance::investOptionDisplay(int minInvestYears, long double initiallInvestment,
+                            int percentage, std::string investmentPlan){
+    std::cout << "The " << investmentPlan
+    << " requires an initial investment of R" << initiallInvestment << "." << std::endl;
+    std::cout << "You won't be allowed to touch your funds for a minimum of "
+    << minInvestYears << " years.";
+    std::cout << "The investment will will gain you an increase of " << percentage << "% per month" <<
+    " depending on the state of your investment account, balance and frequency of interaction." << std::endl;
+    std::cout << std::endl;
+    std::cout << "-------------------------------------------" << std::endl;
+    std::cout << std::endl;
+        investChoice(initiallInvestment);
+}
+
+//invest
+void Finance::invest(){
+    int option{0};
+    do{
+    std::cout << "We offer a number of investment options";
+    std::cout << "...choose option to learn more" << std::endl;
+    std::cout << "1. Silver Investment Path" << std::endl;
+    std::cout << "2. Gold Investment Path" << std::endl;
+    std::cout << "3. Platinum Investment Path" << std::endl;
+    std::cout << "4. Back to main screen" << std::endl;
+    std::cin >> option;
+    std::cin.ignore();
+
+    switch(option){
+        case 1:
+        investOptionDisplay(2, 10000, 2, "Silver Investment Path");
+        break;
+
+        case 2:
+        investOptionDisplay(4, 50000, 5, "Gold Investment Path");
+        break;
+
+        case 3:
+        investOptionDisplay(5, 10000, 8, "Platinum Investment Path");
+        break;
+
+        case 4:
+        break;
+
+        default:
+        std::cout << "Invalid entry :(" << std::endl;
+    }
+
+    }while(option != 4);
+}
+//end invest
+//**fix above
 
 //transaction screen
 void Finance::transactions(){

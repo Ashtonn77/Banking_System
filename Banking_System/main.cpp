@@ -96,7 +96,7 @@ int main()
                 break;
 
                 case 3:
-                interact.tempLoan();
+                interact.invest();
                 break;
 
                 default:
