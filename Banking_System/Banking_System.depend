@@ -47,3 +47,11 @@
 	"AccountHolder.h"
 	"Finance.h"
 
+1588090411 source:/home/ashton/Documents/Banking_System/Banking_System/Finance.cpp
+	<iostream>
+	<vector>
+	<ctime>
+	<cmath>
+	"AccountHolder.h"
+	"Finance.h"
+

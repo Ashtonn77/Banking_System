@@ -75,6 +75,7 @@ int main()
             std::cout << "1. New Account" << std::endl;
             std::cout << "2. Existing Account" << std::endl;
             std::cout << "3. Test" << std::endl;
+            std::cout << "4. Exit" << std::endl;
             std::cin >> choice;
             std::cin.ignore();
 
@@ -103,7 +104,7 @@ int main()
                 std::cout << "<---The End------> ";
             }
 
-            }while(toupper(choice) != 3);
+            }while(choice != 4);
 
     return 0;
 }

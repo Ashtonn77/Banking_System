@@ -88,29 +88,42 @@ void Finance::tempLoan(){
 //invest choice
 void Finance::investChoice(long double initiallInvestment){
     char choice{};
-    char choice2{};
     std::cout << "Would you like to go ahead with the investment?___y/n  ";
     std::cin >> choice;
     std::cin.ignore();
+
+    //check if user wants to invest
     if(toupper(choice) == 'Y'){
+        //std::cout << "Ok" << std::endl;
+
+        //check if user has enough in balance
         if(initiallInvestment < balance[0]){
             balance[0] -= initiallInvestment;
-            std::cout << "Great stuff...your funds have been invested" << std::endl;
+            std::cout << "Thank you. Investment successfull" << std::endl;
+            std::cout << "Your current balance is R" << balance[0] << std::endl;
         }
         else{
-            std::cout << "I'm sorry you have insufficient funds to proceed" << std::endl;
-            std::cout << "Would you like to make a deposit into your account?___y/n  ";
-            std::cin >> choice2;
+            std::cout << "I'm sorry you don\'t have suffecient funds in your accout to proceed" << std::endl;
+            std::cout << "Would you like to make a deposit?___y/n";
+            char makeDeposit{};
+            std::cin >> makeDeposit;
             std::cin.ignore();
-            if(toupper(choice2) == 'Y'){
+            if(toupper(makeDeposit) == 'Y'){
                 depositFunds();
-            }else{
-                std::cout << "back to menu" << std::endl;
             }
-        }//end first inner else
-    }else{
-        std::cout << "back to menu" << std::endl;
-    }//end outer most else
+            else{
+                std::cout << "Sorry we couldn\'t come to an agreement" << std::endl;
+            }
+
+        }//end check if user has enough in balance
+
+    }
+    else{
+        std::cout << "Not ok" << std::endl;
+    }//end check if user wants to invest
+
+
+
 }
 
 
@@ -155,9 +168,6 @@ void Finance::invest(){
         investOptionDisplay(5, 10000, 8, "Platinum Investment Path");
         break;
 
-        case 4:
-        break;
-
         default:
         std::cout << "Invalid entry :(" << std::endl;
     }
@@ -181,6 +191,7 @@ do{
     std::cout << "6. Transer money to another account" << std::endl;
     std::cout << "7. Print statement" << std::endl;
     std::cout << "8. View details" << std::endl;
+    std::cout << "0. Back" << std::endl;
 
     std::cin >> choice;
     std::cin.ignore();
@@ -203,6 +214,7 @@ do{
             break;
 
             case 5:
+            invest();
             break;
 
             case 6:
