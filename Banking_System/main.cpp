@@ -16,51 +16,54 @@ int main()
     int choice{0};
     int cnt{-1};
 
-            std::cout << "Welcome to A.N Bank" << std::endl;
-            std::cout << "How can we help you today?" << std::endl;
+    std::cout << "Welcome to A.N Bank" << std::endl;
+    std::cout << "How can we help you today?" << std::endl;
 
-            do{
-            std::cout << std::endl;
-            std::cout << "1. Open a new account" << std::endl;
-            std::cout << "2. Access an existing account" << std::endl;
-            std::cout << "3. Test" << std::endl;
-            std::cout << "4. Exit" << std::endl;
-            std::cin >> choice;
-            std::cin.ignore();
+    do
+    {
+        std::cout << "1. Open a new account" << std::endl;
+        std::cout << "2. Access an existing account" << std::endl;
+        std::cout << "3. View current date and time" << std::endl;
+        std::cout << "4. Exit" << std::endl;
+        std::cin >> choice;
+        std::cin.ignore();
 
-            switch(choice){
-                case 1:
-                {
-                cnt++;
-                long int accountNum = start.getRandom(100000000, 999999999);
-                std::string fullNameVar = start.getAccountHolderName();
-                int pin = start.getRandom(1234, 9999);
-                long double openingBalance = start.getInitialAmt();
-                long double salaryVal = start.getSalaryVal();
-                interact.newAccount(accountNum, fullNameVar, pin, openingBalance, salaryVal);
-                system("clear");
-                std::cout << "Your pin code is " << interact.getPin()[cnt] << std::endl;
-                std::cout << "Keep it concealed at all times!!!" << std::endl;
-                }
-                break;
+        switch(choice)
+        {
+        case 1:
+        {
+            cnt++;
+            long int accountNum = start.getRandom(100000000, 999999999);
+            std::string fullNameVar = start.getAccountHolderName();
+            int pin = start.getRandom(1234, 9999);
+            long double openingBalance = start.getInitialAmt();
+            long double salaryVal = start.getSalaryVal();
+            interact.newAccount(accountNum, fullNameVar, pin, openingBalance, salaryVal);
+            system("clear");
+            std::cout << "Your pin code is " << interact.getPin()[cnt] << std::endl;
+            std::cout << "Keep it concealed at all times!!!" << std::endl;
+        }
+        break;
 
-                case 2:
-                if(cnt == -1){
+        case 2:
+            if(cnt == -1)
+            {
                 std::cout << "No accounts created...create an account first!" << std::endl;
                 break;
-                }
-                interact.authorization(interact.getPin());
-                break;
-
-                case 3:
-                //start.display();
-                break;
-
-                default:
-                std::cout << "<---The End------> ";
             }
+            interact.authorization(interact.getPin());
+            break;
 
-            }while(choice != 4);
+        case 3:
+            start.dateAndTime();
+            break;
+
+        default:
+            std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
+        }
+
+    }
+    while(choice != 4);
 
     return 0;
 }

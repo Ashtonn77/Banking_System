@@ -6,16 +6,17 @@
 #include "Finance.h"
 #include "General.h"
 
-Finance::Finance(){}
+Finance::Finance() {}
 General go;
 //make deposit
-void Finance::depositFunds(){
+void Finance::depositFunds()
+{
     double funds{0.0};
     system("clear");
     go.displayTransactionPrompt("deposit");
     std::cin >> funds;
     std::cin.ignore();
-    balance[0] += funds;
+    balance[searchIndex] += funds;
     recentDeposits[searchIndex] = funds;
     system("clear");
     std::cout << "Your deposit was a success" << std::endl;
@@ -24,7 +25,8 @@ void Finance::depositFunds(){
 //end deposit
 
 //make withdrawal
-void Finance::withdrawFunds(){
+void Finance::withdrawFunds()
+{
 
 
     double withdrawAmnt{0};
@@ -33,19 +35,23 @@ void Finance::withdrawFunds(){
     go.displayTransactionPrompt("withdraw");
     std::cin >> withdrawAmnt;
     std::cin.ignore();
-    if(withdrawAmnt < balance[0]){
+    if(withdrawAmnt < balance[searchIndex])
+    {
         go.withdrawFunc(withdrawAmnt, recentWithdrawals, balance, searchIndex, "Withdrawal");
 
-    }else{
+    }
+    else
+    {
         system("clear");
-        std::cout << "Sorry...you seem to have insuffecient funds in your account" << std::endl;
-        std::cout << "Would you like to make a deposit? (y/n)  ";
+        go.insufficientFunds();
         std::cin >> choice;
         std::cin.ignore();
-        if(toupper(choice) == 'Y'){
+        if(toupper(choice) == 'Y')
+        {
             depositFunds();
         }
-        else{
+        else
+        {
             system("clear");
             std::cout << "back to menu." << std::endl;
         }
@@ -56,38 +62,41 @@ void Finance::withdrawFunds(){
 //end withdrawal
 
 //loan function ***improve ** make loan amount higher
-void Finance::tempLoan(){
-    long double salaryVal  {salary[0]};
-    long double currentBalance {balance[0]};
+void Finance::tempLoan()
+{
+    long double salaryVal  {salary[searchIndex]};
+    long double currentBalance {balance[searchIndex]};
     const double interestRate {0.08};
     long double loanAmnt {0.0};
     char choice{};
     currentBalance > salaryVal ? loanAmnt = salaryVal + (salaryVal * 0.15) :
-    loanAmnt = salaryVal - (salaryVal * 0.15);
+                                            loanAmnt = salaryVal - (salaryVal * 0.15);
 
     double monthlyInstallment = (loanAmnt + (loanAmnt * interestRate)) / 24;
 
     system("clear");
     std::cout << "Based on your salary and current balance," << std::endl;
-    std::cout << "we can offer you a temporay loan of R" << loanAmnt << ",";
-    std::cout << "payable over a span of 24 months" << std::endl;
+    std::cout << " we can offer you a temporay loan of R" << loanAmnt << ",";
+    std::cout << " payable over a span of 24 months" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
     std::cout << std::endl;
     std::cout << "We offer a fixed interest rate of " << interestRate * 100 << "%" << std::endl;
     std::cout << "Your monthly installments will be R" << monthlyInstallment
-     << " payable at the end of every month" << std::endl;
+              << " payable at the end of every month" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
     std::cout << "Accept loan deal and proceed? (y/n)  ";
     std::cin >> choice;
     std::cin.ignore();
 
-    if(toupper(choice) == 'Y'){
-        balance[0] += loanAmnt;
+    if(toupper(choice) == 'Y')
+    {
+        balance[searchIndex] += loanAmnt;
         system("clear");
         std::cout << "Loan approved..." << std::endl;
         go.displayBalance(balance, searchIndex);
     }
-    else{
+    else
+    {
         system("clear");
         std::cout << "Sorry we couldn't come to an agreement :(" << std::endl;
     }
@@ -95,7 +104,8 @@ void Finance::tempLoan(){
 
 
 //invest choice
-void Finance::investChoice(long double initiallInvestment){
+void Finance::investChoice(long double initiallInvestment)
+{
     char choice{};
     //system("clear");
     std::cout << "Would you like to go ahead with the investment? (y/n)  ";
@@ -103,27 +113,31 @@ void Finance::investChoice(long double initiallInvestment){
     std::cin.ignore();
 
     //check if user wants to invest
-    if(toupper(choice) == 'Y'){
+    if(toupper(choice) == 'Y')
+    {
 
         //check if user has enough in balance
-        if(initiallInvestment < balance[0]){
-            balance[0] -= initiallInvestment;
+        if(initiallInvestment < balance[searchIndex])
+        {
+            balance[searchIndex] -= initiallInvestment;
 
             system("clear");
             std::cout << "Transaction successfull :) Thank you for investing your money with us. " << std::endl;
             go.displayBalance(balance, searchIndex);
         }
-        else{
+        else
+        {
             system("clear");
-            std::cout << "I'm sorry you don\'t have suffecient funds in your accout to proceed" << std::endl;
-            std::cout << "Would you like to make a deposit? (y/n)  ";
+            go.insufficientFunds();
             char makeDeposit{};
             std::cin >> makeDeposit;
             std::cin.ignore();
-            if(toupper(makeDeposit) == 'Y'){
+            if(toupper(makeDeposit) == 'Y')
+            {
                 depositFunds();
             }
-            else{
+            else
+            {
                 system("clear");
                 std::cout << "Sorry we couldn\'t come to an agreement" << std::endl;
             }
@@ -131,7 +145,8 @@ void Finance::investChoice(long double initiallInvestment){
         }//end check if user has enough in balance
 
     }
-    else{
+    else
+    {
         system("clear");
         std::cout << "Sorry we couldn\'t help you today. Goodbye" << std::endl;
     }//end check if user wants to invest
@@ -143,61 +158,68 @@ void Finance::investChoice(long double initiallInvestment){
 
 //invest display
 void Finance::investOptionDisplay(int minInvestYears, long double initiallInvestment,
-                            int percentage, std::string investmentPlan){
+                                  int percentage, std::string investmentPlan)
+{
 
 
     std::cout << "The " << investmentPlan
-    << " requires an initial investment of R" << initiallInvestment << "." << std::endl;
+              << " requires an initial investment of R" << initiallInvestment << "." << std::endl;
     std::cout << "You won't be allowed to touch your funds for a minimum of "
-    << minInvestYears << " years.";
+              << minInvestYears << " years.";
     std::cout << " The investment will gain you an increase of " << percentage << "% per month" <<
-    " depending on the state of your investment account, balance and frequency of interaction." << std::endl;
+              " depending on the state of your investment account, balance and frequency of interaction." << std::endl;
     std::cout << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
     std::cout << std::endl;
-        investChoice(initiallInvestment);
+    investChoice(initiallInvestment);
 }
 
 //invest
-void Finance::invest(){
+void Finance::invest()
+{
     int option{0};
-    do{
-    std::cout << "We offer a number of investment options";
-    std::cout << "...choose option to learn more" << std::endl;
-    std::cout << "1. Silver Investment Path" << std::endl;
-    std::cout << "2. Gold Investment Path" << std::endl;
-    std::cout << "3. Platinum Investment Path" << std::endl;
-    std::cout << "4. Back to main screen" << std::endl;
-    std::cin >> option;
-    std::cin.ignore();
+    do
+    {
+        std::cout << "We offer a number of investment options";
+        std::cout << "...choose option to learn more" << std::endl;
+        std::cout << "1. Silver Investment Path" << std::endl;
+        std::cout << "2. Gold Investment Path" << std::endl;
+        std::cout << "3. Platinum Investment Path" << std::endl;
+        std::cout << "4. Back to main screen" << std::endl;
+        std::cin >> option;
+        std::cin.ignore();
 
-    switch(option){
+        switch(option)
+        {
         case 1:
-        system("clear");
-        investOptionDisplay(2, 10000, 2, "Silver Investment Path");
-        break;
+            system("clear");
+            investOptionDisplay(2, 10000, 2, "Silver Investment Path");
+            break;
 
         case 2:
-        system("clear");
-        investOptionDisplay(4, 50000, 5, "Gold Investment Path");
-        break;
+            system("clear");
+            investOptionDisplay(4, 50000, 5, "Gold Investment Path");
+            break;
 
         case 3:
-        system("clear");
-        investOptionDisplay(5, 10000, 8, "Platinum Investment Path");
-        break;
+            system("clear");
+            investOptionDisplay(5, 10000, 8, "Platinum Investment Path");
+            break;
 
         default:
-        std::cout << "" << std::endl;
-    }
+            std::cout << "" << std::endl;
+        }
 
-    }while(option != 4);
+    }
+    while(option != 4);
 }
 //end invest
 
 
 //transfer
-void Finance::moneyTransfer(){
+void Finance::moneyTransfer()
+{
+    system("clear");
     std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
     int transferTo{0};
     std::cin >> transferTo;
@@ -205,27 +227,49 @@ void Finance::moneyTransfer(){
     int cnt{0};
     int amnt{0};
 
-    for(int i = 0; i < accountNumber.size(); i++){
-        if(transferTo == accountNumber[i]) {
-        cnt = i;
-        go.displayTransactionPrompt("transfer");
-        std::cin >> amnt;
-        std::cin.ignore();
-        if(amnt > balance[searchIndex]){
-        std::cout << "Sorry you have insufficient funds to proceed" << std::endl;
-        }else{
-        balance[searchIndex] -= amnt;
-        balance[cnt] += amnt;
+    for(int i = 0; i < accountNumber.size(); i++)
+    {
+        if(transferTo == accountNumber[i])
+        {
+            cnt = i;
+            go.displayTransactionPrompt("transfer");
+            std::cin >> amnt;
+            std::cin.ignore();
+            if(amnt > balance[searchIndex])
+            {
 
-        std::cout << "Transfer complete" << std::endl;
-        go.displayBalance(balance, searchIndex);
-        std::cout << fullName[cnt] << "'s current balance is R" << balance[cnt] << std::endl;
-        }//end check balance
+                system("clear");
+                go.insufficientFunds();
+                char makeDeposit{};
+                std::cin >> makeDeposit;
+                std::cin.ignore();
+                if(toupper(makeDeposit) == 'Y')
+                {
+                    depositFunds();
+                }
+                else
+                {
+                    system("clear");
+                    std::cout << "Sorry we couldn\'t come to an agreement" << std::endl;
+                }
+
+            }
+            else
+            {
+                balance[searchIndex] -= amnt;
+                balance[cnt] += amnt;
+                system("clear");
+                std::cout << "Transfer complete" << std::endl;
+                go.displayBalance(balance, searchIndex);
+                std::cout << fullName[cnt] << "'s current balance is R" << balance[cnt] << std::endl;
+            }//end check balance
 
         }
-        else cnt++;
+        else
+            cnt++;
     }
-    if(cnt == accountNumber.size()){
+    if(cnt == accountNumber.size())
+    {
         system("clear");
         std::cout << "Sorry account number not found :( Please enter a another account number" << std::endl;
     }
@@ -234,75 +278,80 @@ void Finance::moneyTransfer(){
 //end transfer
 
 //transaction screen
-void Finance::transactions(){
+void Finance::transactions()
+{
     int choice{0};
     system("clear");
     std::cout << "Welcome " << getFullName()[searchIndex] << ". Choose one of the options below"<< std::endl;
-do{
+    do
+    {
 
-    std::cout << std::endl;
-    std::cout << "1. Make a deposit" << std::endl;
-    std::cout << "2. Make a withdrawal" << std::endl;
-    std::cout << "3. Take a temporary loan" << std::endl;
-    std::cout << "4. Check balance" << std::endl;
-    std::cout << "5. Invest your money" << std::endl;
-    std::cout << "6. Transer money to another account" << std::endl;
-    std::cout << "7. Print statement" << std::endl;
-    std::cout << "8. View details" << std::endl;
-    std::cout << "0. Back" << std::endl;
+        std::cout << std::endl;
+        std::cout << "1. Make a deposit" << std::endl;
+        std::cout << "2. Make a withdrawal" << std::endl;
+        std::cout << "3. Take a temporary loan" << std::endl;
+        std::cout << "4. Check balance" << std::endl;
+        std::cout << "5. Invest your money" << std::endl;
+        std::cout << "6. Transer money to another account" << std::endl;
+        std::cout << "7. Print statement" << std::endl;
+        std::cout << "8. View details" << std::endl;
+        std::cout << "0. Back" << std::endl;
 
-    std::cin >> choice;
-    std::cin.ignore();
+        std::cin >> choice;
+        std::cin.ignore();
 
-    switch(choice){
+        switch(choice)
+        {
         case 1:
             depositFunds();
             break;
 
-            case 2:
+        case 2:
             withdrawFunds();
             break;
 
-            case 3:
+        case 3:
             tempLoan();
             break;
 
-            case 4:
-             system("clear");
-             go.displayBalance(balance, searchIndex);
+        case 4:
+            system("clear");
+            go.displayBalance(balance, searchIndex);
             break;
 
-            case 5:
+        case 5:
             invest();
             break;
 
-            case 6:
+        case 6:
             moneyTransfer();
             break;
 
-            case 7:
+        case 7:
+            std::cout << "Sorry...this feature is currently disabled :(" << std::endl;
             break;
 
         case 8:
-        system("clear");
-        std::cout << "Account holder      ------> " << getFullName()[searchIndex] << std::endl;
-        std::cout << "Account number      ------> " << getAccNum()[searchIndex] << std::endl;
-        std::cout << "Account holder pin  ------> " << getPin()[searchIndex] << std::endl;
-        std::cout << "Salary              ------> R" << getSalary()[searchIndex] << std::endl;
-        std::cout << "Account balance     ------> R" << getBalance()[searchIndex] << std::endl;
-        std::cout << "Recent withdrawals  ------> R" << recentWithdrawals[searchIndex] << std::endl;
-        std::cout << "Recent deposits     ------> R" << recentDeposits[searchIndex] << std::endl;
-        break;
+            system("clear");
+            std::cout << "Account holder      ------> " << getFullName()[searchIndex] << std::endl;
+            std::cout << "Account number      ------> " << getAccNum()[searchIndex] << std::endl;
+            std::cout << "Account holder pin  ------> " << getPin()[searchIndex] << std::endl;
+            std::cout << "Salary              ------> R" << getSalary()[searchIndex] << std::endl;
+            std::cout << "Account balance     ------> R" << getBalance()[searchIndex] << std::endl;
+            std::cout << "Recent withdrawals  ------> R" << recentWithdrawals[searchIndex] << std::endl;
+            std::cout << "Recent deposits     ------> R" << recentDeposits[searchIndex] << std::endl;
+            break;
 
         case 9:
-        break;
+            break;
 
         default:
-        system("clear");
-        std::cout << "" << std::endl;
-    }
+            system("clear");
+            std::cout << "" << std::endl;
+        }
 
-}while(choice != 0);
+    }
+    while(choice != 0);
 
 }
 
@@ -316,17 +365,20 @@ void Finance::authorization(std::vector<int> pin)
     std::cin >> input;
     std::cin.ignore();
 
-    for(int i = 0; i < pin.size(); i++){
-        if(input == pin[i]){
-        searchIndex = i;
-        transactions();
-        break;
+    for(int i = 0; i < pin.size(); i++)
+    {
+        if(input == pin[i])
+        {
+            searchIndex = i;
+            transactions();
+            break;
         }
         cnt++;
     }
-    if(cnt == pin.size()){
-    system("clear");
-    std::cout << "Incorrect pin" << std::endl;
+    if(cnt == pin.size())
+    {
+        system("clear");
+        std::cout << "Incorrect pin" << std::endl;
     }
 
 }

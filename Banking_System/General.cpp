@@ -7,13 +7,15 @@ General::General()
     //ctor
 }
 
-long int General::getRandom(long int minNum, long int maxNum){
+long int General::getRandom(long int minNum, long int maxNum)
+{
     srand(time(nullptr));
     return minNum + (rand() % maxNum);
 }
 
 //account number
-std::string General::getAccountHolderName(){
+std::string General::getAccountHolderName()
+{
     system("clear");
     std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
     std::string fName;
@@ -22,7 +24,8 @@ std::string General::getAccountHolderName(){
 }
 
 //salary details
-long double General::getSalaryVal(){
+long double General::getSalaryVal()
+{
     long double sal{0.0};
     int choice{0};
     system("clear");
@@ -32,29 +35,30 @@ long double General::getSalaryVal(){
     std::cout << "3. Monthly" << std::endl;
     std::cin >> choice;
     std::cin.ignore();
-    switch(choice){
-        case 1 :
+    switch(choice)
+    {
+    case 1 :
         system("clear");
         std::cout << "Please enter your total weekly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
-        case 2 :
+    case 2 :
         system("clear");
         std::cout << "Please enter your total fortnightly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
-        case 3 :
+    case 3 :
         system("clear");
         std::cout << "Please enter your total monthly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
-        default:
+    default:
         system("clear");
         std::cout << "Invalid entry" << std::endl;
     }
@@ -62,7 +66,8 @@ long double General::getSalaryVal(){
 }
 
 //starting deposit
-long double General::getInitialAmt(){
+long double General::getInitialAmt()
+{
     system("clear");
     std::cout << "How much will your initial deposit be? ";
     long double amt;
@@ -73,21 +78,48 @@ long double General::getInitialAmt(){
 
 //withdraw
 void General::withdrawFunc(int amnt, std::vector<int> &wDrawVec,
-                    std::vector<long double> &tempBal,
-                    int i, std::string str){
-        tempBal[0] -= amnt;
-        wDrawVec[i] = amnt;
-        system("clear");
-        std::cout << str << " successfull :)" << std::endl;
-        displayBalance(tempBal, i);
+                           std::vector<long double> &tempBal,
+                           int i, std::string str)
+{
+    tempBal[0] -= amnt;
+    wDrawVec[i] = amnt;
+    system("clear");
+    std::cout << str << " successfull :)" << std::endl;
+    displayBalance(tempBal, i);
 }
 
 //display balance
-void General::displayBalance(std::vector<long double> tempBal, int i){
+void General::displayBalance(std::vector<long double> tempBal, int i)
+{
     std::cout << "Your current balance is R" << tempBal[i] << std::endl;
 }
 
 //transaction prompt
-void General::displayTransactionPrompt(std::string trans){
+void General::displayTransactionPrompt(std::string trans)
+{
     std::cout << "How much would you like to " << trans << "?" << std::endl;
+}
+
+//insufficient funds
+void General::insufficientFunds()
+{
+    std::cout << "Sorry, you seem to have insuffecient funds in your account to proceed" << std::endl;
+    std::cout << "Would you like to make a deposit? (y/n)  ";
+}
+
+int General::dateAndTime(){
+    system("clear");
+    time_t now = time(0);
+    // Convert now to tm struct for local timezone
+    tm* localtm = localtime(&now);
+    std::cout << "The local date and time is: " << asctime(localtm) << std::endl;
+    // Convert now to tm struct for UTC
+    tm* gmtm = gmtime(&now);
+    if (gmtm != NULL) {
+    std::cout << "The UTC date and time is: " << asctime(gmtm) << std::endl;
+    }
+    else {
+    std::cerr << "Failed to get the UTC date and time" << std::endl;
+    return EXIT_FAILURE;
+}
 }
