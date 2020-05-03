@@ -6,7 +6,7 @@ class Finance: public AccountHolder
 {
     public:
         Finance();
-        void authorization(int pin);
+        void authorization(std::vector<int> pin);
         void depositFunds();
         void withdrawFunds();
         void transactions();
@@ -14,6 +14,7 @@ class Finance: public AccountHolder
         void investChoice(long double initiallInvestment);
         void investOptionDisplay(int minInvestYears, long double initiallInvestment, int percentage, std::string investmentPlan);
         void invest();
+        void moneyTransfer();
 
 
     private:

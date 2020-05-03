@@ -76,6 +76,7 @@ int main()
     Finance interact;
 
     int choice{0};
+    int cnt{-1};
 
             do{
             std::cout << "Make choice___" << std::endl;
@@ -89,6 +90,7 @@ int main()
             switch(choice){
                 case 1:
                 {
+                cnt++;
                 long int accountNum = getRandom(100000000, 999999999);
                 std::string fullNameVar = getAccountHolderName();
                 int pin = getRandom(1234, 9999);
@@ -96,17 +98,21 @@ int main()
                 long double salaryVal = getSalaryVal();
                 interact.newAccount(accountNum, fullNameVar, pin, openingBalance, salaryVal);
                 system("clear");
-                std::cout << "Your pin code is " << interact.getPin()[0] << std::endl;
+                std::cout << "Your pin code is " << interact.getPin()[cnt] << std::endl;
                 std::cout << "Keep it concealed at all times!!!" << std::endl;
                 }
                 break;
 
                 case 2:
-                interact.authorization(interact.getPin()[0]);
+                if(cnt == -1){
+                std::cout << "No accounts created...create an account first!" << std::endl;
+                break;
+                }
+                interact.authorization(interact.getPin());
                 break;
 
                 case 3:
-                interact.invest();
+                interact.moneyTransfer();
                 break;
 
                 default:

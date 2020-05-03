@@ -92,7 +92,6 @@ void Finance::tempLoan(){
     }
 }
 
-//**fix below
 
 //invest choice
 void Finance::investChoice(long double initiallInvestment){
@@ -195,13 +194,47 @@ void Finance::invest(){
     }while(option != 4);
 }
 //end invest
-//**fix above
+
+
+void Finance::moneyTransfer(){
+    std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
+    int transferTo{0};
+    std::cin >> transferTo;
+    std::cin.ignore();
+    int cnt{0};
+    int amnt{0};
+
+    for(int i = 0; i < accountNumber.size(); i++){
+        if(transferTo == accountNumber[i]) {
+        cnt = i;
+        std::cout << "How much would you like to transfer?" << std::endl;
+        std::cin >> amnt;
+        std::cin.ignore();
+        balance[searchIndex] -= amnt;
+        balance[cnt] += amnt;
+
+        std::cout << "Transfer complete" << std::endl;
+        std::cout << "Your current balance is R" << balance[searchIndex] << std::endl;
+        std::cout << fullName[cnt] << "'s current balance is R" << balance[cnt] << std::endl;
+        }
+        else cnt++;
+    }
+    if(cnt == accountNumber.size()){
+        system("clear");
+        std::cout << "Sorry account number not found :( Please enter a another account number" << std::endl;
+    }
+
+}
+
 
 //transaction screen
 void Finance::transactions(){
-int choice{0};
-
+    int choice{0};
+    system("clear");
+    std::cout << "Welcome " << getFullName()[searchIndex] << ". Choose one of the below options"<< std::endl;
 do{
+
+    std::cout << std::endl;
     std::cout << "1. Make a deposit" << std::endl;
     std::cout << "2. Make a withdrawal" << std::endl;
     std::cout << "3. Take a temporary loan" << std::endl;
@@ -238,6 +271,7 @@ do{
             break;
 
             case 6:
+            moneyTransfer();
             break;
 
             case 7:
@@ -245,11 +279,11 @@ do{
 
         case 8:
         system("clear");
-        std::cout << "Account holder      ------> " << getFullName()[0] << std::endl;
-        std::cout << "Account number      ------> " << getAccNum()[0] << std::endl;
-        std::cout << "Account holder pin  ------> " << getPin()[0] << std::endl;
-        std::cout << "Salary              ------> R" << getSalary()[0] << std::endl;
-        std::cout << "Account balance     ------> R" << getBalance()[0] << std::endl;
+        std::cout << "Account holder      ------> " << getFullName()[searchIndex] << std::endl;
+        std::cout << "Account number      ------> " << getAccNum()[searchIndex] << std::endl;
+        std::cout << "Account holder pin  ------> " << getPin()[searchIndex] << std::endl;
+        std::cout << "Salary              ------> R" << getSalary()[searchIndex] << std::endl;
+        std::cout << "Account balance     ------> R" << getBalance()[searchIndex] << std::endl;
         break;
 
         case 9:
@@ -257,7 +291,7 @@ do{
 
         default:
         system("clear");
-        std::cout << "Running anyway" << std::endl;
+        std::cout << "" << std::endl;
     }
 
 }while(choice != 0);
@@ -265,18 +299,27 @@ do{
 }
 
 //to access existing account
-void Finance::authorization(int pin)
+void Finance::authorization(std::vector<int> pin)
 {
     int input{0};
+    int cnt{0};
     system("clear");
     std::cout << "Please enter your pin code to access account__ ";
     std::cin >> input;
     std::cin.ignore();
-    if(input == pin){
-    transactions();
-    } else {
+
+    for(int i = 0; i < pin.size(); i++){
+        if(input == pin[i]){
+        searchIndex = i;
+        transactions();
+        break;
+        }
+        cnt++;
+    }
+    if(cnt == pin.size()){
     system("clear");
     std::cout << "Incorrect pin" << std::endl;
     }
+
 }
 
