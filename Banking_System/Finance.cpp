@@ -4,39 +4,39 @@
 #include <cmath>
 #include "AccountHolder.h"
 #include "Finance.h"
+#include "General.h"
 
 Finance::Finance(){}
-
+General go;
 //make deposit
 void Finance::depositFunds(){
     double funds{0.0};
     system("clear");
-    std::cout << "How much would you like to deposit?" << std::endl;
+    go.displayTransactionPrompt("deposit");
     std::cin >> funds;
     std::cin.ignore();
     balance[0] += funds;
-
+    recentDeposits[searchIndex] = funds;
     system("clear");
     std::cout << "Your deposit was a success" << std::endl;
-    std::cout << "Your available balance is R" << balance[0] << std::endl;
+    go.displayBalance(balance, searchIndex);
 }
 //end deposit
 
 //make withdrawal
 void Finance::withdrawFunds(){
+
+
     double withdrawAmnt{0};
     char choice{};
     system("clear");
-    std::cout << "How much would you like to withdraw?" << std::endl;
+    go.displayTransactionPrompt("withdraw");
     std::cin >> withdrawAmnt;
     std::cin.ignore();
     if(withdrawAmnt < balance[0]){
-        balance[0] -= withdrawAmnt;
-        system("clear");
-        std::cout << "Withdrawal successfull :)" << std::endl;
-        std::cout << "Your current balance is R" << balance[0]  << std::endl;
-    }
-    else{
+        go.withdrawFunc(withdrawAmnt, recentWithdrawals, balance, searchIndex, "Withdrawal");
+
+    }else{
         system("clear");
         std::cout << "Sorry...you seem to have insuffecient funds in your account" << std::endl;
         std::cout << "Would you like to make a deposit? (y/n)  ";
@@ -84,7 +84,8 @@ void Finance::tempLoan(){
     if(toupper(choice) == 'Y'){
         balance[0] += loanAmnt;
         system("clear");
-        std::cout << "Loan approved...your current balance is R" << balance[0] << std::endl;
+        std::cout << "Loan approved..." << std::endl;
+        go.displayBalance(balance, searchIndex);
     }
     else{
         system("clear");
@@ -103,7 +104,6 @@ void Finance::investChoice(long double initiallInvestment){
 
     //check if user wants to invest
     if(toupper(choice) == 'Y'){
-        //std::cout << "Ok" << std::endl;
 
         //check if user has enough in balance
         if(initiallInvestment < balance[0]){
@@ -111,7 +111,7 @@ void Finance::investChoice(long double initiallInvestment){
 
             system("clear");
             std::cout << "Transaction successfull :) Thank you for investing your money with us. " << std::endl;
-            std::cout << "Your current balance is R" << balance[0] << std::endl;
+            go.displayBalance(balance, searchIndex);
         }
         else{
             system("clear");
@@ -196,6 +196,7 @@ void Finance::invest(){
 //end invest
 
 
+//transfer
 void Finance::moneyTransfer(){
     std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
     int transferTo{0};
@@ -207,15 +208,20 @@ void Finance::moneyTransfer(){
     for(int i = 0; i < accountNumber.size(); i++){
         if(transferTo == accountNumber[i]) {
         cnt = i;
-        std::cout << "How much would you like to transfer?" << std::endl;
+        go.displayTransactionPrompt("transfer");
         std::cin >> amnt;
         std::cin.ignore();
+        if(amnt > balance[searchIndex]){
+        std::cout << "Sorry you have insufficient funds to proceed" << std::endl;
+        }else{
         balance[searchIndex] -= amnt;
         balance[cnt] += amnt;
 
         std::cout << "Transfer complete" << std::endl;
-        std::cout << "Your current balance is R" << balance[searchIndex] << std::endl;
+        go.displayBalance(balance, searchIndex);
         std::cout << fullName[cnt] << "'s current balance is R" << balance[cnt] << std::endl;
+        }//end check balance
+
         }
         else cnt++;
     }
@@ -225,13 +231,13 @@ void Finance::moneyTransfer(){
     }
 
 }
-
+//end transfer
 
 //transaction screen
 void Finance::transactions(){
     int choice{0};
     system("clear");
-    std::cout << "Welcome " << getFullName()[searchIndex] << ". Choose one of the below options"<< std::endl;
+    std::cout << "Welcome " << getFullName()[searchIndex] << ". Choose one of the options below"<< std::endl;
 do{
 
     std::cout << std::endl;
@@ -263,7 +269,7 @@ do{
 
             case 4:
              system("clear");
-             std::cout << "Your current balance is R" << balance[0] << std::endl;
+             go.displayBalance(balance, searchIndex);
             break;
 
             case 5:
@@ -284,6 +290,8 @@ do{
         std::cout << "Account holder pin  ------> " << getPin()[searchIndex] << std::endl;
         std::cout << "Salary              ------> R" << getSalary()[searchIndex] << std::endl;
         std::cout << "Account balance     ------> R" << getBalance()[searchIndex] << std::endl;
+        std::cout << "Recent withdrawals  ------> R" << recentWithdrawals[searchIndex] << std::endl;
+        std::cout << "Recent deposits     ------> R" << recentDeposits[searchIndex] << std::endl;
         break;
 
         case 9:

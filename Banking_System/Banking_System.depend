@@ -55,27 +55,28 @@
 	"AccountHolder.h"
 	"Finance.h"
 
-1587827367 source:/home/ashton/Documents/c++/Banking_System/Banking_System/AccountHolder.cpp
+1588530060 source:/home/ashton/Documents/c++/Banking_System/Banking_System/AccountHolder.cpp
 	<iostream>
 	<vector>
 	"AccountHolder.h"
 	"Finance.h"
 
-1588501060 /home/ashton/Documents/c++/Banking_System/Banking_System/AccountHolder.h
+1588532450 /home/ashton/Documents/c++/Banking_System/Banking_System/AccountHolder.h
 	<iostream>
 	<vector>
 
-1588502802 /home/ashton/Documents/c++/Banking_System/Banking_System/Finance.h
+1588532426 /home/ashton/Documents/c++/Banking_System/Banking_System/Finance.h
 
-1588503098 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
+1588534828 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
 	<iostream>
 	<vector>
 	<ctime>
 	<cmath>
 	"AccountHolder.h"
 	"Finance.h"
+	"General.h"
 
-1588503066 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
+1588533341 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
 	<iostream>
 	<vector>
 	<ctime>
@@ -83,4 +84,19 @@
 	<cstdio>
 	"AccountHolder.h"
 	"Finance.h"
+	"General.h"
+
+1588530446 source:/home/ashton/Documents/c++/Banking_System/Banking_System/GeneralFunctions.cpp
+	<iostream>
+	<vector>
+	"GeneralFunctions.h"
+
+1588532847 /home/ashton/Documents/c++/Banking_System/Banking_System/GeneralFunctions.h
+
+1588534837 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
+
+1588534270 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
+	<iostream>
+	<vector>
+	"General.h"
 

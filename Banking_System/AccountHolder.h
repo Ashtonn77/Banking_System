@@ -16,6 +16,8 @@ class AccountHolder
         std::vector<long double> getBalance();
         std::vector<long double> getSalary();
         int searchIndex{-1};
+        std::vector<int> recentWithdrawals{0};
+        std::vector<int> recentDeposits{0};
 
 
     private:
