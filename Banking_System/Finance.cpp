@@ -10,11 +10,13 @@ Finance::Finance(){}
 //make deposit
 void Finance::depositFunds(){
     double funds{0.0};
+    system("clear");
     std::cout << "How much would you like to deposit?" << std::endl;
     std::cin >> funds;
     std::cin.ignore();
     balance[0] += funds;
 
+    system("clear");
     std::cout << "Your deposit was a success" << std::endl;
     std::cout << "Your available balance is R" << balance[0] << std::endl;
 }
@@ -24,23 +26,27 @@ void Finance::depositFunds(){
 void Finance::withdrawFunds(){
     double withdrawAmnt{0};
     char choice{};
+    system("clear");
     std::cout << "How much would you like to withdraw?" << std::endl;
     std::cin >> withdrawAmnt;
     std::cin.ignore();
     if(withdrawAmnt < balance[0]){
         balance[0] -= withdrawAmnt;
+        system("clear");
         std::cout << "Withdrawal successfull :)" << std::endl;
         std::cout << "Your current balance is R" << balance[0]  << std::endl;
     }
     else{
+        system("clear");
         std::cout << "Sorry...you seem to have insuffecient funds in your account" << std::endl;
-        std::cout << "Would you like to make a deposit? y/n__";
+        std::cout << "Would you like to make a deposit? (y/n)  ";
         std::cin >> choice;
         std::cin.ignore();
         if(toupper(choice) == 'Y'){
             depositFunds();
         }
         else{
+            system("clear");
             std::cout << "back to menu." << std::endl;
         }
 
@@ -61,24 +67,27 @@ void Finance::tempLoan(){
 
     double monthlyInstallment = (loanAmnt + (loanAmnt * interestRate)) / 24;
 
+    system("clear");
     std::cout << "Based on your salary and current balance," << std::endl;
-    std::cout << "we can offer you temporay loan of R" << loanAmnt << ",";
+    std::cout << "we can offer you a temporay loan of R" << loanAmnt << ",";
     std::cout << "payable over a span of 24 months" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
     std::cout << std::endl;
     std::cout << "We offer a fixed interest rate of " << interestRate * 100 << "%" << std::endl;
     std::cout << "Your monthly installments will be R" << monthlyInstallment
-     << " payable by the last day of the month" << std::endl;
+     << " payable at the end of every month" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
-    std::cout << "Accept loan deal and proceed? y/n__";
+    std::cout << "Accept loan deal and proceed? (y/n)  ";
     std::cin >> choice;
     std::cin.ignore();
 
     if(toupper(choice) == 'Y'){
         balance[0] += loanAmnt;
+        system("clear");
         std::cout << "Loan approved...your current balance is R" << balance[0] << std::endl;
     }
     else{
+        system("clear");
         std::cout << "Sorry we couldn't come to an agreement :(" << std::endl;
     }
 }
@@ -88,7 +97,8 @@ void Finance::tempLoan(){
 //invest choice
 void Finance::investChoice(long double initiallInvestment){
     char choice{};
-    std::cout << "Would you like to go ahead with the investment?___y/n  ";
+    //system("clear");
+    std::cout << "Would you like to go ahead with the investment? (y/n)  ";
     std::cin >> choice;
     std::cin.ignore();
 
@@ -99,12 +109,15 @@ void Finance::investChoice(long double initiallInvestment){
         //check if user has enough in balance
         if(initiallInvestment < balance[0]){
             balance[0] -= initiallInvestment;
-            std::cout << "Thank you. Investment successfull" << std::endl;
+
+            system("clear");
+            std::cout << "Transaction successfull :) Thank you for investing your money with us. " << std::endl;
             std::cout << "Your current balance is R" << balance[0] << std::endl;
         }
         else{
+            system("clear");
             std::cout << "I'm sorry you don\'t have suffecient funds in your accout to proceed" << std::endl;
-            std::cout << "Would you like to make a deposit?___y/n";
+            std::cout << "Would you like to make a deposit? (y/n)  ";
             char makeDeposit{};
             std::cin >> makeDeposit;
             std::cin.ignore();
@@ -112,6 +125,7 @@ void Finance::investChoice(long double initiallInvestment){
                 depositFunds();
             }
             else{
+                system("clear");
                 std::cout << "Sorry we couldn\'t come to an agreement" << std::endl;
             }
 
@@ -119,7 +133,8 @@ void Finance::investChoice(long double initiallInvestment){
 
     }
     else{
-        std::cout << "Not ok" << std::endl;
+        system("clear");
+        std::cout << "Sorry we couldn\'t help you today. Goodbye" << std::endl;
     }//end check if user wants to invest
 
 
@@ -130,11 +145,13 @@ void Finance::investChoice(long double initiallInvestment){
 //invest display
 void Finance::investOptionDisplay(int minInvestYears, long double initiallInvestment,
                             int percentage, std::string investmentPlan){
+
+
     std::cout << "The " << investmentPlan
     << " requires an initial investment of R" << initiallInvestment << "." << std::endl;
     std::cout << "You won't be allowed to touch your funds for a minimum of "
     << minInvestYears << " years.";
-    std::cout << "The investment will will gain you an increase of " << percentage << "% per month" <<
+    std::cout << " The investment will gain you an increase of " << percentage << "% per month" <<
     " depending on the state of your investment account, balance and frequency of interaction." << std::endl;
     std::cout << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
@@ -157,19 +174,22 @@ void Finance::invest(){
 
     switch(option){
         case 1:
+        system("clear");
         investOptionDisplay(2, 10000, 2, "Silver Investment Path");
         break;
 
         case 2:
+        system("clear");
         investOptionDisplay(4, 50000, 5, "Gold Investment Path");
         break;
 
         case 3:
+        system("clear");
         investOptionDisplay(5, 10000, 8, "Platinum Investment Path");
         break;
 
         default:
-        std::cout << "Invalid entry :(" << std::endl;
+        std::cout << "" << std::endl;
     }
 
     }while(option != 4);
@@ -182,7 +202,6 @@ void Finance::transactions(){
 int choice{0};
 
 do{
-
     std::cout << "1. Make a deposit" << std::endl;
     std::cout << "2. Make a withdrawal" << std::endl;
     std::cout << "3. Take a temporary loan" << std::endl;
@@ -210,6 +229,7 @@ do{
             break;
 
             case 4:
+             system("clear");
              std::cout << "Your current balance is R" << balance[0] << std::endl;
             break;
 
@@ -224,6 +244,7 @@ do{
             break;
 
         case 8:
+        system("clear");
         std::cout << "Account holder      ------> " << getFullName()[0] << std::endl;
         std::cout << "Account number      ------> " << getAccNum()[0] << std::endl;
         std::cout << "Account holder pin  ------> " << getPin()[0] << std::endl;
@@ -235,6 +256,7 @@ do{
         break;
 
         default:
+        system("clear");
         std::cout << "Running anyway" << std::endl;
     }
 
@@ -246,11 +268,15 @@ do{
 void Finance::authorization(int pin)
 {
     int input{0};
+    system("clear");
     std::cout << "Please enter your pin code to access account__ ";
     std::cin >> input;
     std::cin.ignore();
     if(input == pin){
     transactions();
-    } else std::cout << "Incorrect pin" << std::endl;
+    } else {
+    system("clear");
+    std::cout << "Incorrect pin" << std::endl;
+    }
 }
 

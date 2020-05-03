@@ -2,6 +2,7 @@
 #include <vector>
 #include <ctime>
 #include <cmath>
+#include <cstdio>
 #include "AccountHolder.h"
 #include "Finance.h"
 
@@ -13,10 +14,10 @@ long int getRandom(long int minNum, long int maxNum){
 
 //account number
 std::string getAccountHolderName(){
+    system("clear");
     std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
     std::string fName;
     std::getline(std::cin, fName);
-    //std::cin.ignore();
     return fName;
 }
 
@@ -24,6 +25,7 @@ std::string getAccountHolderName(){
 long double getSalaryVal(){
     long double sal{0.0};
     int choice{0};
+    system("clear");
     std::cout << "Choose salary option: " << std::endl;
     std::cout << "1. Weekly" << std::endl;
     std::cout << "2. Fortnightly" << std::endl;
@@ -32,24 +34,28 @@ long double getSalaryVal(){
     std::cin.ignore();
     switch(choice){
         case 1 :
+        system("clear");
         std::cout << "Please enter your total weekly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
         case 2 :
+        system("clear");
         std::cout << "Please enter your total fortnightly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
         case 3 :
+        system("clear");
         std::cout << "Please enter your total monthly earnings" << std::endl;
         std::cin >> sal;
         std::cin.ignore();
         break;
 
         default:
+        system("clear");
         std::cout << "Invalid entry" << std::endl;
     }
     return sal;
@@ -57,6 +63,7 @@ long double getSalaryVal(){
 
 //starting deposit
 long double getInitialAmt(){
+    system("clear");
     std::cout << "How much will your initial deposit be? ";
     long double amt;
     std::cin >> amt;
@@ -88,7 +95,9 @@ int main()
                 long double openingBalance = getInitialAmt();
                 long double salaryVal = getSalaryVal();
                 interact.newAccount(accountNum, fullNameVar, pin, openingBalance, salaryVal);
+                system("clear");
                 std::cout << "Your pin code is " << interact.getPin()[0] << std::endl;
+                std::cout << "Keep it concealed at all times!!!" << std::endl;
                 }
                 break;
 
