@@ -19,7 +19,7 @@ public:
     int dateAndTime();
     void displayInvalidInput(std::string str);
     void createFile(std::string name, long int accNum, int pin, long double sal, long double bal,
-                    int recWithdraw, int recDeposit)
+                    int recWithdraw, int recDeposit);
 
 };
 

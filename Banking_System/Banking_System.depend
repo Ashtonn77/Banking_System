@@ -76,7 +76,7 @@
 	"Finance.h"
 	"General.h"
 
-1589126861 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
+1589127239 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
 	<iostream>
 	<vector>
 	<ctime>
@@ -94,7 +94,7 @@
 
 1588532847 /home/ashton/Documents/c++/Banking_System/Banking_System/GeneralFunctions.h
 
-1589126781 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
+1589127395 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
 
 1589127214 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
 	<iostream>
