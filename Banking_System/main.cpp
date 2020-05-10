@@ -29,7 +29,6 @@ int main()
         std::cout << "2. Access an existing account" << std::endl;
         std::cout << "3. View current date and time" << std::endl;
         std::cout << "4. Exit" << std::endl;
-        std::cout << "5. Test" << std::endl;
         std::cin >> choice;
         std::cin.ignore();
 
@@ -63,28 +62,9 @@ int main()
             start.dateAndTime();
             break;
         case 4:
-        std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
-        exit(4);
-        break;
-
-        case 5:
-       {
-         std::ofstream file;
-            file.open("test.txt");
-            file << "Account holder      ------> " << interact.getFullName()[interact.searchIndex] << std::endl;
-            file << "Account number      ------> " << interact.getAccNum()[interact.searchIndex] << std::endl;
-            file << "Account holder pin  ------> " << interact.getPin()[interact.searchIndex] << std::endl;
-            file << "Salary              ------> R" << interact.getSalary()[interact.searchIndex] << std::endl;
-            file << "Account balance     ------> R" << interact.getBalance()[interact.searchIndex] << std::endl;
-            file << "Recent withdrawals  ------> R" << interact.recentWithdrawals[interact.searchIndex] << std::endl;
-            file << "Recent deposits     ------> R" << interact.recentDeposits[interact.searchIndex] << std::endl;
-            file.close();
-
-       }
-        system("clear");
-        std::cout << "A text file with your details has been created" << std::endl;
-        std::cout << "Connect your printer to print it out" << std::endl;
-        break;
+            std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
+            exit(4);
+            break;
 
         default:
             system("clear");

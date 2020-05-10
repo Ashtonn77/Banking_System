@@ -1,7 +1,0 @@
-Account holder      ------> Ash
-Account number      ------> 948579018
-Account holder pin  ------> 3121
-Salary              ------> R5
-Account balance     ------> R25000
-Recent withdrawals  ------> R0
-Recent deposits     ------> R0

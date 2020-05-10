@@ -15,17 +15,20 @@ void Finance::depositFunds()
     system("clear");
 
     //check input
-    while(true){
-    go.displayTransactionPrompt("deposit");
-    std::cin >> funds;
+    while(true)
+    {
+        go.displayTransactionPrompt("deposit");
+        std::cin >> funds;
 
-     if(std::cin.good()) break;
-     else{
-        system("clear");
-        go.displayInvalidInput("numbers");
-        std::cin.clear();
-        std::cin.ignore(100000, '\n');
-    }
+        if(std::cin.good())
+            break;
+        else
+        {
+            system("clear");
+            go.displayInvalidInput("numbers");
+            std::cin.clear();
+            std::cin.ignore(100000, '\n');
+        }
 
     }
 
@@ -47,17 +50,20 @@ void Finance::withdrawFunds()
     char choice{};
     system("clear");
 
-     while(true){
-     go.displayTransactionPrompt("withdraw");
-     std::cin >> withdrawAmnt;
+    while(true)
+    {
+        go.displayTransactionPrompt("withdraw");
+        std::cin >> withdrawAmnt;
 
-     if(std::cin.good()) break;
-     else{
-        system("clear");
-        go.displayInvalidInput("numbers");
-        std::cin.clear();
-        std::cin.ignore(100000, '\n');
-    }
+        if(std::cin.good())
+            break;
+        else
+        {
+            system("clear");
+            go.displayInvalidInput("numbers");
+            std::cin.clear();
+            std::cin.ignore(100000, '\n');
+        }
     }
 
     std::cin.ignore();
@@ -249,11 +255,14 @@ void Finance::moneyTransfer()
     int transferTo{0};
 
 
-     while(true){
+    while(true)
+    {
         std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
         std::cin >> transferTo;
-         if(std::cin.good()) break;
-         else{
+        if(std::cin.good())
+            break;
+        else
+        {
             system("clear");
             go.displayInvalidInput("numbers");
             std::cin.clear();
@@ -367,8 +376,17 @@ void Finance::transactions()
             break;
 
         case 7:
-            std::cout << "Sorry...this feature is currently disabled :(" << std::endl;
-            break;
+        {
+            go.createFile(getFullName()[searchIndex], getAccNum()[searchIndex],
+                          getPin()[searchIndex], getSalary()[searchIndex],
+                          getBalance()[searchIndex], recentWithdrawals[searchIndex],
+                          recentDeposits[searchIndex]);
+
+        }
+        system("clear");
+        std::cout << "A text file with your details has been created" << std::endl;
+        std::cout << "Connect your printer to print it out" << std::endl;
+        break;
 
         case 8:
             system("clear");

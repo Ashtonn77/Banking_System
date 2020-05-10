@@ -9,18 +9,20 @@ General::General()
 }
 
 
-void createFile()
+void General::createFile(std::string name, long int accNum, int pin, long double sal, long double bal,
+                         int recWithdraw, int recDeposit)
 {
-
     std::ofstream file;
-    file.open("test.txt");
-    file << "Account holder      ------> " << interact.getFullName()[interact.searchIndex] << std::endl;
-    file << "Account number      ------> " << interact.getAccNum()[interact.searchIndex] << std::endl;
-    file << "Account holder pin  ------> " << interact.getPin()[interact.searchIndex] << std::endl;
-    file << "Salary              ------> R" << interact.getSalary()[interact.searchIndex] << std::endl;
-    file << "Account balance     ------> R" << interact.getBalance()[interact.searchIndex] << std::endl;
-    file << "Recent withdrawals  ------> R" << interact.recentWithdrawals[interact.searchIndex] << std::endl;
-    file << "Recent deposits     ------> R" << interact.recentDeposits[interact.searchIndex] << std::endl;
+    long int x{getRandom(10000, 99999)};
+    std::string str{std::to_string(x)};
+    file.open(str + ".txt");
+    file << "Account holder      ------> " << name << std::endl;
+    file << "Account number      ------> " << accNum << std::endl;
+    file << "Account holder pin  ------> " << pin << std::endl;
+    file << "Salary              ------> R" << sal << std::endl;
+    file << "Account balance     ------> R" << bal << std::endl;
+    file << "Recent withdrawals  ------> R" << recWithdraw << std::endl;
+    file << "Recent deposits     ------> R" << recDeposit << std::endl;
     file.close();
 
 }
