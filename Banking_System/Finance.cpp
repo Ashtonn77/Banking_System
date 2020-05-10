@@ -13,8 +13,22 @@ void Finance::depositFunds()
 {
     double funds{0.0};
     system("clear");
+
+    //check input
+    while(true){
     go.displayTransactionPrompt("deposit");
     std::cin >> funds;
+
+     if(std::cin.good()) break;
+     else{
+        system("clear");
+        go.displayInvalidInput("numbers");
+        std::cin.clear();
+        std::cin.ignore(100000, '\n');
+    }
+
+    }
+
     std::cin.ignore();
     balance[searchIndex] += funds;
     recentDeposits[searchIndex] = funds;
@@ -32,8 +46,20 @@ void Finance::withdrawFunds()
     double withdrawAmnt{0};
     char choice{};
     system("clear");
-    go.displayTransactionPrompt("withdraw");
-    std::cin >> withdrawAmnt;
+
+     while(true){
+     go.displayTransactionPrompt("withdraw");
+     std::cin >> withdrawAmnt;
+
+     if(std::cin.good()) break;
+     else{
+        system("clear");
+        go.displayInvalidInput("numbers");
+        std::cin.clear();
+        std::cin.ignore(100000, '\n');
+    }
+    }
+
     std::cin.ignore();
     if(withdrawAmnt < balance[searchIndex])
     {
@@ -220,9 +246,22 @@ void Finance::invest()
 void Finance::moneyTransfer()
 {
     system("clear");
-    std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
     int transferTo{0};
-    std::cin >> transferTo;
+
+
+     while(true){
+        std::cout << "Enter the account number you'd like to transfer funds to" << std::endl;
+        std::cin >> transferTo;
+         if(std::cin.good()) break;
+         else{
+            system("clear");
+            go.displayInvalidInput("numbers");
+            std::cin.clear();
+            std::cin.ignore(100000, '\n');
+        }
+
+    }
+
     std::cin.ignore();
     int cnt{0};
     int amnt{0};
@@ -260,8 +299,8 @@ void Finance::moneyTransfer()
                 balance[cnt] += amnt;
                 system("clear");
                 std::cout << "Transfer complete" << std::endl;
+                std::cout << "You just transfered R" << amnt << " to " << fullName[cnt] << std::endl;
                 go.displayBalance(balance, searchIndex);
-                std::cout << fullName[cnt] << "'s current balance is R" << balance[cnt] << std::endl;
             }//end check balance
 
         }

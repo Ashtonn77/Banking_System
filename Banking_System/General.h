@@ -17,6 +17,7 @@ public:
     void displayTransactionPrompt(std::string trans);
     void insufficientFunds();
     int dateAndTime();
+    void displayInvalidInput(std::string str);
 
 };
 

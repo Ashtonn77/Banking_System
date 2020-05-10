@@ -3,10 +3,15 @@
 #include <ctime>
 #include <cmath>
 #include <cstdio>
-#include <typeinfo>
+#include <fstream>
 #include "AccountHolder.h"
 #include "Finance.h"
 #include "General.h"
+
+
+void createFile(){
+
+}
 
 
 int main()
@@ -17,6 +22,7 @@ int main()
     int choice{0};
     int cnt{-1};
 
+
     std::cout << "Welcome to A.N Bank" << std::endl;
     std::cout << "How can we help you today?" << std::endl;
 
@@ -25,8 +31,8 @@ int main()
         std::cout << "1. Open a new account" << std::endl;
         std::cout << "2. Access an existing account" << std::endl;
         std::cout << "3. View current date and time" << std::endl;
-        std::cout << "4. Test" << std::endl;
-        std::cout << "5. Exit" << std::endl;
+        std::cout << "4. Exit" << std::endl;
+        std::cout << "5. Test" << std::endl;
         std::cin >> choice;
         std::cin.ignore();
 
@@ -59,15 +65,18 @@ int main()
         case 3:
             start.dateAndTime();
             break;
+        case 4:
+        std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
+        exit(4);
+        break;
 
-       case 4:
-       {
-       long double a{5};
-       std::cout << typeid(a).name() << std::endl;
-       break;
-       }
+        case 5:
+
+        break();
+
         default:
-            std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
+            system("clear");
+            std::cout << "Invalid entry :(" << std::endl;
         }
 
     }

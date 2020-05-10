@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <typeinfo>
 #include "General.h"
 
 General::General()
@@ -8,7 +7,7 @@ General::General()
     //ctor
 }
 
-void displayInvalidInput(std::string x){
+void General::displayInvalidInput(std::string x){
     std::cout << "Invalid...please use " << x << " only" << std::endl;
     std::cin.clear();
 }
