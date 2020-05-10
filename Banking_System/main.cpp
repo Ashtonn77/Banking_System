@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdio>
+#include <typeinfo>
 #include "AccountHolder.h"
 #include "Finance.h"
 #include "General.h"
@@ -24,7 +25,8 @@ int main()
         std::cout << "1. Open a new account" << std::endl;
         std::cout << "2. Access an existing account" << std::endl;
         std::cout << "3. View current date and time" << std::endl;
-        std::cout << "4. Exit" << std::endl;
+        std::cout << "4. Test" << std::endl;
+        std::cout << "5. Exit" << std::endl;
         std::cin >> choice;
         std::cin.ignore();
 
@@ -58,6 +60,12 @@ int main()
             start.dateAndTime();
             break;
 
+       case 4:
+       {
+       long double a{5};
+       std::cout << typeid(a).name() << std::endl;
+       break;
+       }
         default:
             std::cout << "Hope to see you again soon. Goodbye!" << std::endl;
         }

@@ -67,7 +67,7 @@
 
 1588535963 /home/ashton/Documents/c++/Banking_System/Banking_System/Finance.h
 
-1588536254 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
+1588537335 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
 	<iostream>
 	<vector>
 	<ctime>
@@ -76,12 +76,13 @@
 	"Finance.h"
 	"General.h"
 
-1588536781 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
+1589121037 source:/home/ashton/Documents/c++/Banking_System/Banking_System/main.cpp
 	<iostream>
 	<vector>
 	<ctime>
 	<cmath>
 	<cstdio>
+	<typeinfo>
 	"AccountHolder.h"
 	"Finance.h"
 	"General.h"
@@ -95,8 +96,9 @@
 
 1588536754 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
 
-1588536806 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
+1589122341 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
 	<iostream>
 	<vector>
+	<typeinfo>
 	"General.h"
 

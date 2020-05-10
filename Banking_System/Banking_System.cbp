@@ -38,6 +38,8 @@
 		<Unit filename="AccountHolder.h" />
 		<Unit filename="Finance.cpp" />
 		<Unit filename="Finance.h" />
+		<Unit filename="General.cpp" />
+		<Unit filename="General.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

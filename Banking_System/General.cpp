@@ -1,10 +1,24 @@
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 #include "General.h"
 
 General::General()
 {
     //ctor
+}
+
+void displayInvalidInput(std::string x){
+    std::cout << "Invalid...please use " << x << " only" << std::endl;
+    std::cin.clear();
+}
+
+bool gotDigit(std::string str){
+
+    for(auto character:str){
+        if(isdigit(character)) return true;
+    }
+    return false;
 }
 
 long int General::getRandom(long int minNum, long int maxNum)
@@ -17,9 +31,16 @@ long int General::getRandom(long int minNum, long int maxNum)
 std::string General::getAccountHolderName()
 {
     system("clear");
-    std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
     std::string fName;
+
+    while(true){
+    std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
     std::getline(std::cin, fName);
+
+    if(gotDigit(fName)) displayInvalidInput("letters");
+    else break;
+    }
+
     return fName;
 }
 
@@ -69,13 +90,25 @@ long double General::getSalaryVal()
 long double General::getInitialAmt()
 {
     system("clear");
-    std::cout << "How much will your initial deposit be? ";
-    long double amt;
-    std::cin >> amt;
-    std::cin.ignore();
-    return amt;
-}
 
+    long double amt;
+
+    //check input for digits only
+    while(true){
+    std::cout << "How much will your initial deposit be? ";
+    std::cin >> amt;
+    if(std::cin.good()) break;
+    else{
+        displayInvalidInput("numbers");
+        std::cin.clear();
+        std::cin.ignore(100000, '\n');
+
+    }
+
+    }
+    std::cin.ignore();
+     return amt;
+}
 //withdraw
 void General::withdrawFunc(int amnt, std::vector<int> &wDrawVec,
                            std::vector<long double> &tempBal,
