@@ -67,7 +67,7 @@
 
 1588535963 /home/ashton/Documents/c++/Banking_System/Banking_System/Finance.h
 
-1589127173 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
+1589127363 source:/home/ashton/Documents/c++/Banking_System/Banking_System/Finance.cpp
 	<iostream>
 	<vector>
 	<ctime>
@@ -94,9 +94,9 @@
 
 1588532847 /home/ashton/Documents/c++/Banking_System/Banking_System/GeneralFunctions.h
 
-1589127395 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
+1589127514 /home/ashton/Documents/c++/Banking_System/Banking_System/General.h
 
-1589127214 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
+1589128118 source:/home/ashton/Documents/c++/Banking_System/Banking_System/General.cpp
 	<iostream>
 	<vector>
 	<fstream>

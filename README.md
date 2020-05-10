@@ -1,2 +1,5 @@
 # Banking_System
-Banking system using c++ **in progress**
+feathure rich Banking system using c++
+
+Fully functional (no database connection)
+

@@ -1,0 +1,7 @@
+Account holder      ------> Ashton
+Account number      ------> 993383572
+Account holder pin  ------> 6421
+Salary              ------> R25000
+Account balance     ------> R50000
+Recent withdrawals  ------> R10000
+Recent deposits     ------> R25000
