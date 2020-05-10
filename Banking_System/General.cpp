@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "General.h"
 
 General::General()
@@ -7,15 +8,37 @@ General::General()
     //ctor
 }
 
-void General::displayInvalidInput(std::string x){
+
+void createFile()
+{
+
+    std::ofstream file;
+    file.open("test.txt");
+    file << "Account holder      ------> " << interact.getFullName()[interact.searchIndex] << std::endl;
+    file << "Account number      ------> " << interact.getAccNum()[interact.searchIndex] << std::endl;
+    file << "Account holder pin  ------> " << interact.getPin()[interact.searchIndex] << std::endl;
+    file << "Salary              ------> R" << interact.getSalary()[interact.searchIndex] << std::endl;
+    file << "Account balance     ------> R" << interact.getBalance()[interact.searchIndex] << std::endl;
+    file << "Recent withdrawals  ------> R" << interact.recentWithdrawals[interact.searchIndex] << std::endl;
+    file << "Recent deposits     ------> R" << interact.recentDeposits[interact.searchIndex] << std::endl;
+    file.close();
+
+}
+
+
+void General::displayInvalidInput(std::string x)
+{
     std::cout << "Invalid...please use " << x << " only" << std::endl;
     std::cin.clear();
 }
 
-bool gotDigit(std::string str){
+bool gotDigit(std::string str)
+{
 
-    for(auto character:str){
-        if(isdigit(character)) return true;
+    for(auto character:str)
+    {
+        if(isdigit(character))
+            return true;
     }
     return false;
 }
@@ -32,12 +55,15 @@ std::string General::getAccountHolderName()
     system("clear");
     std::string fName;
 
-    while(true){
-    std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
-    std::getline(std::cin, fName);
+    while(true)
+    {
+        std::cout << "Enter full name...don't forget the space between each name__" << std::endl;
+        std::getline(std::cin, fName);
 
-    if(gotDigit(fName)) displayInvalidInput("letters");
-    else break;
+        if(gotDigit(fName))
+            displayInvalidInput("letters");
+        else
+            break;
     }
 
     return fName;
@@ -93,20 +119,23 @@ long double General::getInitialAmt()
     long double amt;
 
     //check input for digits only
-    while(true){
-    std::cout << "How much will your initial deposit be? ";
-    std::cin >> amt;
-    if(std::cin.good()) break;
-    else{
-        displayInvalidInput("numbers");
-        std::cin.clear();
-        std::cin.ignore(100000, '\n');
+    while(true)
+    {
+        std::cout << "How much will your initial deposit be? ";
+        std::cin >> amt;
+        if(std::cin.good())
+            break;
+        else
+        {
+            displayInvalidInput("numbers");
+            std::cin.clear();
+            std::cin.ignore(100000, '\n');
 
-    }
+        }
 
     }
     std::cin.ignore();
-     return amt;
+    return amt;
 }
 //withdraw
 void General::withdrawFunc(int amnt, std::vector<int> &wDrawVec,
@@ -139,7 +168,8 @@ void General::insufficientFunds()
     std::cout << "Would you like to make a deposit? (y/n)  ";
 }
 
-int General::dateAndTime(){
+int General::dateAndTime()
+{
     system("clear");
     time_t now = time(0);
     // Convert now to tm struct for local timezone
@@ -147,11 +177,13 @@ int General::dateAndTime(){
     std::cout << "The local date and time is: " << asctime(localtm) << std::endl;
     // Convert now to tm struct for UTC
     tm* gmtm = gmtime(&now);
-    if (gmtm != NULL) {
-    std::cout << "The UTC date and time is: " << asctime(gmtm) << std::endl;
+    if (gmtm != NULL)
+    {
+        std::cout << "The UTC date and time is: " << asctime(gmtm) << std::endl;
     }
-    else {
-    std::cerr << "Failed to get the UTC date and time" << std::endl;
-    return EXIT_FAILURE;
-}
+    else
+    {
+        std::cerr << "Failed to get the UTC date and time" << std::endl;
+        return EXIT_FAILURE;
+    }
 }
