@@ -1,5 +1,5 @@
 # Banking_System
-feathure rich Banking system using c++
+feature rich Banking system using c++
 
 Fully functional (no database connection)
 
